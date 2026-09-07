@@ -1,0 +1,25 @@
+{
+  "name": "rxsilience",
+  "version": "0.1.0",
+  "description": "A lightweight TypeScript frontend load balancer & resilience toolkit. It provides client-side load balancing, service degradation, and seamless DTO↔VO mapping with automatic type conversion and encoding/decoding.",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.0.9",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "packages": [
+    "examples/*",
+    "packages/*"
+  ]
+}
