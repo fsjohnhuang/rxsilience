@@ -223,7 +223,36 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(rolldown@1.2.7)(typescript@6.0.3)(vite@8.2.2)
 
+  packages/graft:
+    dependencies:
+      '@graftjs/zod':
+        specifier: ^0.7.0
+        version: 0.7.0(zod@4.5.4)
+      zod:
+        specifier: ^4.5.4
+        version: 4.5.4
+    devDependencies:
+      typescript:
+        specifier: ~6.0.2
+        version: 6.0.3
+      vite:
+        specifier: ^8.2.2
+        version: 8.2.2
+      vite-plugin-dts:
+        specifier: ^5.1.0
+        version: 5.1.0(rolldown@1.2.7)(typescript@6.0.3)(vite@8.2.2)
+
 packages:
+
+  '@graftjs/core@0.7.0':
+    resolution: {integrity: sha512-YLz0H3RLen7amlFy2oPn/Kgu4jDGJqygvBBaE4JdWf8YyC/bILvbiLCFfDcSWOx8K4BJRyUMcLAajyR7mn2ilA==}
+    engines: {node: '>=20.0.0'}
+
+  '@graftjs/zod@0.7.0':
+    resolution: {integrity: sha512-fn4RGybW7X9Af0aRTUmXRidxfk6EAhPBVnkToZhaAzspEar/y3vcHJifSWRbcktXPyHG2Jjt/7KQVb/aUQla5Q==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      zod: ^4.3.5
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -664,7 +693,17 @@ packages:
   webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
 
+  zod@4.5.4:
+    resolution: {integrity: sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==}
+
 snapshots:
+
+  '@graftjs/core@0.7.0': {}
+
+  '@graftjs/zod@0.7.0(zod@4.5.4)':
+    dependencies:
+      '@graftjs/core': 0.7.0
+      zod: 4.5.4
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -973,3 +1012,5 @@ snapshots:
   vscode-uri@3.2.0: {}
 
   webpack-virtual-modules@0.6.2: {}
+
+  zod@4.5.4: {}
