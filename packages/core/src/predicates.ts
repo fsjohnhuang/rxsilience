@@ -10,6 +10,8 @@ const NETWORK_ERROR_CODES = new Set([
   "ERR_BAD_REQUEST", // 404
 ]);
 
+const MESSAGE_KEYWORDS = ["invalid url", "network"] as const;
+
 /**
  * Checks if an error is a network error.
  * Used as default predicate for ResilientEndpoints fallback.
@@ -24,7 +26,8 @@ export function isNetworkError(error: unknown): boolean {
       return true;
     }
     // Check error message
-    if (error.message.toLowerCase().includes("network")) {
+    const msg = error.message.toLowerCase();
+    if (MESSAGE_KEYWORDS.find((keyword) => msg.includes(keyword))) {
       return true;
     }
   }

@@ -67,7 +67,7 @@ export class ResilientEndpoints<T extends object> extends Endpoints<T> {
   private readonly _lastFallbackRecord: Map<any, LastFallbackRecord> =
     new Map();
 
-  constructor(impl: T, config?: Config) {
+  constructor(impl: T, config?: Partial<Config>) {
     super(impl);
 
     this.shouldFallback = config?.shouldFallback ?? [
@@ -126,6 +126,11 @@ export class ResilientEndpoints<T extends object> extends Endpoints<T> {
     return shouldFallback;
   }
 
+  /**
+   * Cache Mechanism
+   * Return the last return value without calling the method if shouldReturnLastFallbackReason returns true,
+   * otherwise call the endpoint method.
+   */
   getLastFallbackReason(handler: any) {
     const record = this._lastFallbackRecord.get(handler);
     if (record) {
