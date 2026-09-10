@@ -59,12 +59,10 @@ export class EndpointFactory<S extends object> {
         : Object.keys(firstImpl.endpoints);
 
     for (const methodName of methodNames) {
-      const fetchKey = String(methodName);
-
       // Collect all handlers for this method in order
       const handlers: Handler[] = [];
       for (const impl of implementations) {
-        const fn = (impl.endpoints as Record<string, Handler>)[fetchKey];
+        const fn = (impl.endpoints as Record<string, Handler>)[methodName];
         if (fn) {
           handlers.push(fn);
         }
@@ -73,10 +71,10 @@ export class EndpointFactory<S extends object> {
       if (handlers.length > 0) {
         if (handlers.length === 1) {
           // Single handler - return as is, preserving original type
-          stub[fetchKey] = handlers[0];
+          stub[methodName] = handlers[0];
         } else {
           // Multiple handlers - wrap ResilientEndpoints handlers with try/catch
-          stub[fetchKey] = (...args: any[]) => {
+          stub[methodName] = (...args: any[]) => {
             let lastError: unknown;
             for (let i = 0; i < handlers.length; i++) {
               lastError = undefined;

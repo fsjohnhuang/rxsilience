@@ -112,8 +112,7 @@ export class ResilientEndpoints<T extends object> extends Endpoints<T> {
           count: 0,
           error,
           reason:
-            (type as ShouldFallbackToNextType) ==
-            ShouldFallbackToNextType.Promise
+            type == ShouldFallbackToNextType.Promise
               ? Promise.reject(error)
               : of(error),
         };
