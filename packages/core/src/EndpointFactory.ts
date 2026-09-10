@@ -4,6 +4,7 @@ import {
   ShouldFallbackToNextType,
 } from "./endpoints/ResilientEndpoints";
 import { Endpoints } from "./endpoints/Endpoints";
+import { logIFlow } from "./logging";
 
 type HandlerResult = Promise<unknown> | Observable<unknown> | unknown;
 type Handler = (...args: any[]) => HandlerResult;
@@ -84,7 +85,7 @@ export class EndpointFactory<S extends object> {
               try {
                 const result =
                   (impl instanceof ResilientEndpoints
-                    ? impl.getLastFallbackReason(handler)
+                    ? impl.getLastFallbackReason(handler)?.()
                     : undefined) || handler(...args);
 
                 if (isObservable(result)) {

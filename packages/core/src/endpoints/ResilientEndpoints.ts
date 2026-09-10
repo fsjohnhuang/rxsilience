@@ -2,10 +2,10 @@ import { Endpoints } from "./Endpoints";
 import { isNetworkError } from "../predicates";
 import NotImplementedError from "../errors/NotImplementedError";
 import FallbackError from "../errors/FallbackError";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 
 type LastFallbackRecord = {
-  reason: any;
+  reason: () => Promise<any> | Observable<any>;
   error: any;
   count: number;
   createdAt: number;
@@ -113,8 +113,8 @@ export class ResilientEndpoints<T extends object> extends Endpoints<T> {
           error,
           reason:
             type == ShouldFallbackToNextType.Promise
-              ? Promise.reject(error)
-              : of(error),
+              ? () => Promise.reject(error)
+              : () => of(error),
         };
         record.count += 1;
         record.updatedAt = +new Date();

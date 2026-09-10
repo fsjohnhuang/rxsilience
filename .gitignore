@@ -38,3 +38,7 @@ coverage/
 target
 
 .npmrc
+
+# AI Assistant
+.agent
+.claude
